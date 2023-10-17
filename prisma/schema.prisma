@@ -1,0 +1,69 @@
+// This is your corrected Prisma schema:
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Seller {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String @unique
+  password  String
+  Selled_books Sell[]
+
+  @@map("sellers")
+}
+
+model Client {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String @unique
+  password  String
+  books     Sell[]
+
+  @@map("clients")
+}
+
+model Sell {
+  id          Int       @id @default(autoincrement())
+  seller_id   Int
+  client_id   Int
+  book_id     Int
+  category_id Int
+  seller      Seller    @relation(fields: [seller_id], references: [id])
+  client      Client    @relation(fields: [client_id], references: [id])
+  book        Books     @relation(fields: [book_id], references: [id])
+  category    Category  @relation(fields: [category_id], references: [id])
+
+  @@map("sells")
+}
+
+model Category {
+  id     Int      @id @default(autoincrement())
+  name   String
+  books  Books[]
+  sells  Sell[]
+}
+
+model Author {
+  id     Int     @id @default(autoincrement())
+  name   String
+  email  String @unique
+  password  String
+  books  Books[] // Define the opposite relation
+}
+
+model Books {
+  id         Int       @id @default(autoincrement())
+  name       String
+  author_id  Int
+  category_id Int
+  author     Author    @relation( fields: [author_id], references: [id])
+  category   Category  @relation(fields: [category_id], references: [id])
+  sells      Sell[]
+}
