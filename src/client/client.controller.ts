@@ -6,11 +6,14 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ClientService } from './client.service';
 import { ClientDto } from './dto/client.dto';
 
 @Controller('clients')
+@UsePipes(new ValidationPipe({ transform: true }))
 export class ClientController {
   constructor(private readonly clientService: ClientService) {}
   @Get()

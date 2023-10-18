@@ -6,11 +6,14 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { SellerDto } from './dto/seller.dto';
 import { SellerService } from './seller.service';
 
 @Controller('sellers')
+@UsePipes(new ValidationPipe({ transform: true }))
 export class SellerController {
   constructor(private readonly sellerService: SellerService) {}
   @Get()
