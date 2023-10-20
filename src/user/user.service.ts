@@ -6,11 +6,13 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class UserService {
   constructor(private readonly prismaService: PrismaService) {}
   async index() {
-    return this.prismaService.author.findMany({
+    const authors = await this.prismaService.author.findMany({
       include: {
         books: true,
       },
     });
+
+    return authors;
   }
 
   async create(dto: UserDto) {

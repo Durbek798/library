@@ -15,6 +15,8 @@ model Seller {
   email     String @unique
   password  String
   Selled_books Sell[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("sellers")
 }
@@ -25,6 +27,8 @@ model Client {
   email     String @unique
   password  String
   books     Sell[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("clients")
 }
@@ -39,6 +43,8 @@ model Sell {
   client      Client    @relation(fields: [client_id], references: [id])
   book        Books     @relation(fields: [book_id], references: [id])
   category    Category  @relation(fields: [category_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("sells")
 }
@@ -48,6 +54,8 @@ model Category {
   name   String
   books  Books[]
   sells  Sell[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
 
 model Author {
@@ -56,6 +64,8 @@ model Author {
   email  String @unique
   password  String
   books  Books[] // Define the opposite relation
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
 
 model Books {
@@ -66,4 +76,6 @@ model Books {
   author     Author    @relation( fields: [author_id], references: [id])
   category   Category  @relation(fields: [category_id], references: [id])
   sells      Sell[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
