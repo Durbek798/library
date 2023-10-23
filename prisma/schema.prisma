@@ -27,7 +27,7 @@ model Client {
   email     String @unique
   password  String
   books     Sell[]
-  created_at DateTime @default(now())
+  created_at DateTime @default(now()) 
   updated_at DateTime @updatedAt
 
   @@map("clients")
@@ -63,6 +63,7 @@ model Author {
   name   String
   email  String @unique
   password  String
+  hashedRt String?
   books  Books[] // Define the opposite relation
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

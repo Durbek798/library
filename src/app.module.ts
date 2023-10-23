@@ -7,6 +7,7 @@ import { BooksModule } from './books/books.module';
 import { SellerModule } from './seller/seller.module';
 import { ClientModule } from './client/client.module';
 import { OrderModule } from './order/order.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { OrderModule } from './order/order.module';
     SellerModule,
     ClientModule,
     OrderModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
